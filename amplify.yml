@@ -20,6 +20,6 @@ frontend:
       status: '200'
   environmentVariables:
     - name: REACT_APP_ENV
-      value: ${AWS_BRANCH}
+      value: 'main'
     - name: AMPLIFY_ROLE_ARN
-      value: 'arn:aws:iam::${AWS_ACCOUNT_ID}:role/AmplifyDeployRole' 
+      value: 'arn:aws:iam::767828726827:role/AmplifyDeployRole' 
