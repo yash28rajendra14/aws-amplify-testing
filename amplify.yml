@@ -1,0 +1,48 @@
+version: 1
+applications:
+  - frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm ci
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        baseDirectory: frontend/build
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*
+    appRoot: frontend
+
+  - frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm ci
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        baseDirectory: frontend/build
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*
+    appRoot: frontend
+    branches:
+      - pattern: development
+        env:
+          - name: REACT_APP_ENV
+            value: development
+      - pattern: staging
+        env:
+          - name: REACT_APP_ENV
+            value: staging
+      - pattern: main
+        env:
+          - name: REACT_APP_ENV
+            value: production 
