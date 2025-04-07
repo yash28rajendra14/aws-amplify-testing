@@ -1,61 +1,25 @@
 version: 1
-applications:
-  - frontend:
-      phases:
-        preBuild:
-          commands:
-            - npm ci
-        build:
-          commands:
-            - npm run build
-      artifacts:
-        baseDirectory: frontend/build
-        files:
-          - '**/*'
-      cache:
-        paths:
-          - node_modules/**/*
-    appRoot: frontend
-    customRules:
-      - pattern: '**/*'
-        target: '/index.html'
-        status: '200'
-    environmentVariables:
-      - name: AMPLIFY_ROLE_ARN
-        value: 'arn:aws:iam::${AWS_ACCOUNT_ID}:role/AmplifyDeployRole'
-
-  - frontend:
-      phases:
-        preBuild:
-          commands:
-            - npm ci
-        build:
-          commands:
-            - npm run build
-      artifacts:
-        baseDirectory: frontend/build
-        files:
-          - '**/*'
-      cache:
-        paths:
-          - node_modules/**/*
-    appRoot: frontend
-    branches:
-      - pattern: development
-        env:
-          - name: REACT_APP_ENV
-            value: development
-          - name: AMPLIFY_ROLE_ARN
-            value: 'arn:aws:iam::${AWS_ACCOUNT_ID}:role/AmplifyDeployRole'
-      - pattern: staging
-        env:
-          - name: REACT_APP_ENV
-            value: staging
-          - name: AMPLIFY_ROLE_ARN
-            value: 'arn:aws:iam::${AWS_ACCOUNT_ID}:role/AmplifyDeployRole'
-      - pattern: main
-        env:
-          - name: REACT_APP_ENV
-            value: production
-          - name: AMPLIFY_ROLE_ARN
-            value: 'arn:aws:iam::${AWS_ACCOUNT_ID}:role/AmplifyDeployRole' 
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: frontend/build
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+  customRules:
+    - pattern: '**/*'
+      target: '/index.html'
+      status: '200'
+  environmentVariables:
+    - name: REACT_APP_ENV
+      value: ${AWS_BRANCH}
+    - name: AMPLIFY_ROLE_ARN
+      value: 'arn:aws:iam::${AWS_ACCOUNT_ID}:role/AmplifyDeployRole' 
