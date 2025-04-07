@@ -1,0 +1,21 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "amplify:*",
+                "cloudformation:*",
+                "cloudfront:*",
+                "cognito-identity:*",
+                "cognito-idp:*",
+                "dynamodb:*",
+                "iam:*",
+                "lambda:*",
+                "s3:*",
+                "sns:*"
+            ],
+            "Resource": "*"
+        }
+    ]
+} 
